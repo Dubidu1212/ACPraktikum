@@ -15,8 +15,11 @@ x = data$Volume
 y = data$pH
 
 plot(x,y,xlab='Vol/mL', ylab = 'pH', pch=4, ylim = c(0,12),col = 'black', main = "Titration of Acetic Acid using ~0.1M KOH", sub = "c(KOH) = 0.0891M")
+
+#Equivalence Point
 abline(v = 36)
 text(36 +1,0, "EP", cex = .8)
+#Half Equivalence Point
 abline(v = 36/2,h = 4.6, lty = 2:1)
 text(36/2 +1,0, "HEP", cex = .8)
 
