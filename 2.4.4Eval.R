@@ -14,14 +14,17 @@ KOH_factor = 0.891
 #TODO: correct for mass difference
 Vol_1 = data$V_1 - data$V0_1[1]
 Vol_2 = data$V_2- data$V0_2[1]
-Vol_1 = Vol_1*KOH_factor
-Vol_2 = Vol_2*KOH_factor
+Vol_1 = Vol_1#*KOH_factor
+Vol_2 = Vol_2#*KOH_factor
+Vol_1
+Vol_2
 
-plot(Vol_1,data$pH_1, xlab = "Vol/ml", ylab = "pH", pch=3, ylim = c(0,14), xlim = c(0,max(c(Vol_1,Vol_2),na.rm = 1)), main = "Titration of an unknown organic acid with 0.1M KOH")
+plot(Vol_1,data$pH_1, xlab = "Vol/ml", ylab = "pH", pch=3, ylim = c(0,14), xlim = c(0,max(c(Vol_1,Vol_2),na.rm = 1)), main = "Titration of an unknown organic acid with ~0.1M KOH", sub = "Titration factor 0.891")
 points(Vol_2 ,data$pH_2, pch = 4,col = "red")
 
-jmp_1 = 4
-jmp_2 = 5.55
+jmp_1 = 4.4
+jmp_2 = 6.2
+
 abline(v = jmp_1)
 text(jmp_1 + 0.2,0,"EP",cex =.8)
 abline(v = jmp_2,col = "red")
