@@ -1,4 +1,12 @@
 #Calibration of Potentiometric Titration
+#Data format: 
+#V;E;Sol
+#Important. The data is formated like this:
+#V is the amount of volume added of the solution (a or b)
+#Sol is a or b for the solution
+#E is the cell potential in mV
+
+
 data = read.csv("Data/PotentiometricCal.csv",sep=";")
 xa = data$V[data$Sol == 'a']
 ya = data$E[data$Sol == 'a']
@@ -25,7 +33,7 @@ res = data.frame(totV, x, concentration, pAg, data$E)
 res
 
 
-plot(y = data$E,x = pAg, ylim = c(0,10), xlim = c(-100,400), xlab = expression(Delta * "E/mV"), ylab = "pAg", main = "Calibration curve of the Ag Electrode")
+plot(data$E,pAg, ylim = c(0,10), xlim = c(-100,400), xlab = expression(Delta * "E/mV"), ylab = "pAg", main = "Calibration curve of the Ag Electrode")
 grid()
 
 y = -log(concentration[concentration != 0],10)
