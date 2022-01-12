@@ -29,14 +29,14 @@ x_KOH = x_KOH*KOH_factor
 
 x_HCL = -(data$V_HCL-data$V0_HCL[1])
 y_HCL = data$pH_HCL
- HCL_max = max(x_HCL,na.rm = 1)
- HCL_min = min(x_HCL,na.rm = 1)
- 
- KOH_max = max(x_KOH,na.rm = 1)
- KOH_min = min(x_KOH,na.rm = 1)
- 
- tot_max = max(KOH_max,HCL_max)
- tot_min = min(KOH_min,HCL_min)
+HCL_max = max(x_HCL,na.rm = 1)
+HCL_min = min(x_HCL,na.rm = 1)
+
+KOH_max = max(x_KOH,na.rm = 1)
+KOH_min = min(x_KOH,na.rm = 1)
+
+tot_max = max(KOH_max,HCL_max)
+tot_min = min(KOH_min,HCL_min)
 
 plot(x_KOH,y_KOH,xlab='Vol/mL', ylab = 'pH', pch=4, ylim = c(y_KOH[1]-4,y_KOH[1]+4),col = 'blue',xlim = c(tot_min,tot_max), main = "Buffer capacity of tris buffer", sub = "Volume adjusted to 0.01M acid/base")
 
