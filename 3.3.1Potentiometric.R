@@ -24,6 +24,22 @@ pAg = signif(pAg, 3)
 Ag = signif(Ag, 3)
 tab = data.frame(VolKCl,VolTot,Voltage,pAg,Ag)
 
+#Solubility Product
+# 0.1M * 2mL
+Ag0 = 0.1 * 0.002
+CKCl = 123
+Ag0V = Ag0/VolTot
+Clzg = (VolKCl*CKCl)/VolTot
+Cl = Clzg - (Ag0V - Ag)
+Kl = Ag * Cl
+sol_data = data.frame(VolKCl,Ag,Ag0V,Clzg, Kl)
+sol_data
+
+
+
+
+
+
 plot(x,y,xlab="Vol/ml 0.1M KCl", ylab = expression(Delta * "E/mV"),pch=4, main = "Potentiometric Titration of Ag using Cl", sub = "The titrated soltuion was: 50mL 2M KNO3, 10mL 0.1M HNO3, 2mL 0.1M AgNO3 filled up to 100mL ")
 
 spline = smooth.spline(x, y, spar=0.35)
@@ -79,6 +95,8 @@ yIntersect = predict(spline, xIntersect)$y
 abline(h = yIntersect, lty = 2)
 yIntersect
 text(0.1,100,paste(signif(yIntersect, 3), "mV"))
+
+
 
 
 
