@@ -20,24 +20,37 @@ Ag = 10^(-pAg)
 
 
 #Round the data
-pAg = signif(pAg, 3)
-Ag = signif(Ag, 3)
-tab = data.frame(VolKCl,VolTot,Voltage,pAg,Ag)
+r_pAg = signif(pAg, 3)
+r_Ag = signif(Ag, 3)
+tab = data.frame(VolKCl,VolTot,Voltage,r_pAg,r_Ag)
 
 #Solubility Product
 # 0.1M * 2mL
 Ag0 = 0.1 * 0.002
-CKCl = 123
-Ag0V = Ag0/VolTot
-Clzg = (VolKCl*CKCl)/VolTot
+#0.1M KCl
+cKCl = 0.1
+VolTotL = VolTot/1000
+
+#mol/L
+Ag0V = Ag0/(VolTotL)
+#(L*M)/L
+Clzg = (VolKCl/1000*cKCl)/VolTotL
+#M - (M-M)
 Cl = Clzg - (Ag0V - Ag)
 Kl = Ag * Cl
-sol_data = data.frame(VolKCl,Ag,Ag0V,Clzg, Kl)
+#signif
+Ag = signif(Ag,3)
+Ag0V = signif(Ag0V,4)
+Clzg = signif(Clzg,3)
+Kl = signif(Kl,3)
+
+sol_data = data.frame(VolKCl,Ag,Ag0V,Clzg,Cl, Kl, VolTotL)
+sol_data = tail(sol_data,5)
+standard_deviation_Kl = signif(sd(sol_data$Kl),3)
+mean_Kl = mean(sol_data$Kl)
+sol_data$mean_Kl = c(mean_Kl)
+sol_data$standard_deviation_Kl = c(standard_deviation_Kl)
 sol_data
-
-
-
-
 
 
 plot(x,y,xlab="Vol/ml 0.1M KCl", ylab = expression(Delta * "E/mV"),pch=4, main = "Potentiometric Titration of Ag using Cl", sub = "The titrated soltuion was: 50mL 2M KNO3, 10mL 0.1M HNO3, 2mL 0.1M AgNO3 filled up to 100mL ")
@@ -114,4 +127,15 @@ text(0.1,100,paste(signif(yIntersect, 3), "mV"))
 # ypost = log(data$Voltage[data$Volume>=cutoff],10)
 # abline(lm(ypost~xpost))
 #abline(v = cutoff)
+# plot(VolKCl, Ag, )
+# points(VolKCl,Ag0V, pch =2)
+#plot(VolTotL,Cl)
 
+#Log Kl
+plot(VolKCl, -log(Kl,10), main = "Computed Solubility Constant AgCl", xlab = "Vol KCl /mL")
+abline(h = mean(tail(-log(Kl,10),5)), lty = 3)
+text(8.5, paste("Kl(AgCl) = ",signif(mean(tail(Kl, 5)),3)))
+
+plot(VolKCl, Kl, main = "Computed Solubility Constant AgCl", xlab = "Vol KCl /mL")
+abline(h = 0, lty = 3)
+text(0.0000001, paste("Kl(AgCl) = ",signif(mean(tail(Kl, 5)),3)))
