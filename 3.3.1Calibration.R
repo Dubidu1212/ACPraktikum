@@ -46,6 +46,7 @@ abline(v= xIntercept, h = 0, lty = 2)
 xIntercept
 #slope
 line[2]
-text(200,7,paste("slope y/x:",round(line[2],5)))
-text(200,6,paste("x intercept:",round(xIntercept,5), "mV"))
+text(200,7,paste("slope y/x:",signif(line[2],3)))
+text(200,6.5,paste("slope x/y:",signif(1/line[2],3)))
+text(200,6,paste("x intercept:",signif(xIntercept,3), "mV"))
 
