@@ -39,7 +39,14 @@ demo = function(x,y, tanPoint){
   newTan = find_next_point_tangent(spline, tanPoint, tan$b)
   abline(a = newTan$a, b =  newTan$b, col = "lightblue")
   
-  
+}
+
+#converts a linear model to a function
+lm_to_function = function(linear_model){
+  coefs = coef(linear_model)
+  return(function(x){
+      coefs[1] + coefs[2]*x 
+  }) 
 }
 
 
